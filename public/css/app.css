@@ -1,0 +1,62 @@
+div #clientesList{
+    margin: 25px;
+}
+
+.whatsapp-icon {
+    position: relative;
+    left: 620px;
+    top: -59px;
+  }
+
+.whatsapp-icon:hover {
+    background-color: rgba(232, 13, 13, 0.2); /* Fundo suave ao passar o mouse */
+}
+
+/* Media Query para telas menores */
+@media (max-width: 768px) {
+    .whatsapp-icon {
+        margin: 1px;
+        position: relative;
+        left: 270px;
+        top: -59px;
+    }
+}
+/* @media (max-width: 1920px) {
+    .whatsapp-icon {
+        margin: 1px;
+        position: relative;
+        left: 531px;
+        top: -59px;
+    }
+} */
+@media (min-width: 1720px) and (max-width: 1920px) {
+    .whatsapp-icon {
+        margin: 1px;
+        position: relative;
+        left: 531px;
+        top: -59px;
+    }
+}
+
+@media (max-width: 1760) {
+    .whatsapp-icon {
+        margin: 1px;
+        position: relative;
+        left: 439px;
+        top: -59px;
+    }
+}
+
+@media (min-width: 2400px) {
+    .whatsapp-icon {
+        margin: 1px;
+        position: relative;
+        left: 693px;
+        top: -59px;
+    }
+}
+
+/* .grid .grid-cols-1{
+    margin: 25px;
+} */
+
