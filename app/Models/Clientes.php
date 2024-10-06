@@ -19,6 +19,7 @@ class Clientes extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'id_usuario',
         'nome',
         'email',

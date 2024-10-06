@@ -17,6 +17,7 @@ Route::post('dashboard/excluirCliente', [ClientesController::class, 'excluirClie
 Route::post('dashboard/atualizarCliente', [ClientesController::class, 'atualizarCliente'])->name('dashboard.atualizarCliente');
 // Route::delete('dashboard/ajax', [ClientesController::class, 'ajax'])->name('dashboard.ajax');
 Route::post('dashboard/importClientes', [ClientesController::class, 'importClientes'])->name('dashboard.importClientes');
+Route::post('dashboard/mensagemClientes', [ClientesController::class, 'mensagemClientes'])->name('dashboard.mensagemClientes');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

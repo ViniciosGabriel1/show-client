@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -30,7 +29,7 @@
                     <h3 class="text-lg font-bold text-gray-800">Alimentação</h3>
                     <p class="mt-2 mb-6 text-gray-600">Comida saudável e saborosa</p>
                     <button id="Alimentação"
-                       class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+                        class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
                         onclick="verClientes('carregarEstrutura','Alimentação','green')">Ver Clientes</button>
                 </div>
                 <div
@@ -41,7 +40,8 @@
                     <h3 class="text-lg font-bold text-gray-800">Saúde</h3>
                     <p class="mt-2 mb-6 text-gray-600">Serviços e produtos de saúde</p>
                     <button id="Saúde"
-                    class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded"                        onclick="verClientes('carregarEstrutura','Saúde','red')">Ver Clientes</button>
+                        class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded"
+                        onclick="verClientes('carregarEstrutura','Saúde','red')">Ver Clientes</button>
                 </div>
                 <div
                     class="text-center bg-yellow-100 rounded-lg p-6 shadow-md transition-transform transform hover:scale-105">
@@ -50,7 +50,8 @@
                     </div>
                     <h3 class="text-lg font-bold text-gray-800">Varejo</h3>
                     <p class="mt-2 mb-6 text-gray-600">Compras e serviços variados</p>
-                    <button id="Varejo" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-600 hover:border-yellow-600 rounded"
+                    <button id="Varejo"
+                        class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-2 px-4 border-b-4 border-yellow-600 hover:border-yellow-600 rounded"
                         onclick="verClientes('carregarEstrutura','Varejo','yellow')">Ver Clientes</button>
                 </div>
                 <div
@@ -60,7 +61,8 @@
                     </div>
                     <h3 class="text-lg font-bold text-gray-800">Educação</h3>
                     <p class="mt-2 mb-6 text-gray-600">Formação e aprendizado</p>
-                    <button id="Educação" class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-violet-700 hover:border-violet-500 rounded"
+                    <button id="Educação"
+                        class="bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-violet-700 hover:border-violet-500 rounded"
                         onclick="verClientes('carregarEstrutura','Educação','purple')">Ver Clientes</button>
                 </div>
             </div>
@@ -69,65 +71,113 @@
 
 
     <div id="clientesList"></div>
-<!-- Modal de Edição -->
-<div id="editClientModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-    <form action="{{ route('dashboard.atualizarCliente') }}" method="POST">
-        @csrf
-        <div id="modalContent" class="bg-white rounded-lg shadow-lg p-6 transform scale-0 transition-transform duration-300 max-w-xl w-full">
-            <!-- Conteúdo do Modal -->
-            <h2 class="text-xl font-bold mb-4">Editar Cliente</h2>
-            
-            <input type="hidden" id="editClientId" name="id_cliente">
+    <!-- Modal de Edição -->
+    <div id="editClientModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+        <form action="{{ route('dashboard.atualizarCliente') }}" method="POST">
+            @csrf
+            <div id="modalContent"
+                class="bg-white rounded-lg shadow-lg p-6 transform scale-0 transition-transform duration-300 max-w-xl w-full">
+                <!-- Conteúdo do Modal -->
+                <h2 class="text-xl font-bold mb-4">Editar Cliente</h2>
 
-            <label for="editClientName" class="block">Nome:</label>
-            <input type="text" id="editClientName" name="nome" class="border rounded p-2 mb-4 w-full">
+                <input type="hidden" id="editClientId" name="id_cliente">
 
-            <label for="editClientEmail" class="block">Email:</label>
-            <input type="email" id="editClientEmail" name="email" class="border rounded p-2 mb-4 w-full">
+                <label for="editClientName" class="block">Nome:</label>
+                <input type="text" id="editClientName" name="nome" class="border rounded p-2 mb-4 w-full">
 
-            <label for="editClientPhone" class="block">Telefone:</label>
-            <input type="text" id="editClientPhone" name="telefone" class="border rounded p-2 mb-4 w-full">
+                <label for="editClientEmail" class="block">Email:</label>
+                <input type="email" id="editClientEmail" name="email" class="border rounded p-2 mb-4 w-full">
 
-            <label for="editClientCnpj" class="block">CNPJ:</label>
-            <input type="text" id="editClientCnpj" name="cnpj" class="border rounded p-2 mb-4 w-full">
+                <label for="editClientPhone" class="block">Telefone:</label>
+                <input type="text" id="editClientPhone" name="telefone" class="border rounded p-2 mb-4 w-full">
 
-            <label for="editClientCategory" class="block">Categoria:</label>
-            <input type="text" id="editClientCategory" name="categoria" class="border rounded p-2 mb-4 w-full">
+                <label for="editClientCnpj" class="block">CNPJ:</label>
+                <input type="text" id="editClientCnpj" name="cnpj" class="border rounded p-2 mb-4 w-full">
 
-            <label for="editClientAddress" class="block">Endereço:</label>
-            <input type="text" id="editClientAddress" name="endereco" class="border rounded p-2 mb-4 w-full">
+                <label for="editClientCategory" class="block">Categoria:</label>
+                <input type="text" id="editClientCategory" name="categoria" class="border rounded p-2 mb-4 w-full">
 
-            <div class="flex justify-end">
-                <button type="button" onclick="closeModal()" class="bg-gray-300 px-4 py-2 rounded mr-2">Cancelar</button>
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Salvar</button>
+                <label for="editClientAddress" class="block">Endereço:</label>
+                <input type="text" id="editClientAddress" name="endereco" class="border rounded p-2 mb-4 w-full">
+
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeModal()"
+                        class="bg-gray-300 px-4 py-2 rounded mr-2">Cancelar</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Salvar</button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+
+
+    <div id="emailCliente" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+        <form action="{{ route('dashboard.mensagemClientes') }}" method="POST">
+            @csrf
+            <div id="modalEmailContent"
+                class="bg-white rounded-lg shadow-lg p-6 transform scale-0 transition-transform duration-300 max-w-xl w-full">
+                <!-- Conteúdo do Modal -->
+                <h2 class="text-xl font-bold mb-4">Mandar E-mail para o Cliente</h2>
+
+                <input type="hidden" id="clientId" name="id_cliente">
+                <input type="hidden" id="clientName" name="nome">
+                <input type="hidden" id="clientEmail" name="email">
+                <input type="hidden" id="clientCategory" name="categoria">
+
+                <!-- Assunto -->
+                <label for="emailSubject" class="block">Assunto:</label>
+                <input type="text" id="emailSubject" name="assunto" class="border rounded p-2 mb-4 w-full"
+                    placeholder="Digite o assunto do e-mail" required>
+
+                <!-- Mensagem -->
+                <label for="emailMessage" class="block">Mensagem:</label>
+                <textarea id="emailMessage" name="mensagem" class="border rounded p-2 mb-4 w-full" rows="6"
+                    placeholder="Digite a mensagem do e-mail" required></textarea>
+
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeMensagemModal()"
+                        class="bg-gray-300 px-4 py-2 rounded mr-2">Cancelar</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 
-@if(session('success'))
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: "{!! session('success') !!}",
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
+
+{{-- @if (session('success'))
 <script>
     Swal.fire({
         icon: 'success',
         title: 'Sucesso!',
-        text: "{{ session('success') }}",
+        html: '{!! session('success') !!}', // Aqui usamos o 'html' para garantir a interpretação das tags
         confirmButtonText: 'OK'
     });
 </script>
-@endif
+@endif --}}
 
-@if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: "{{ session('error') }}",
-        confirmButtonText: 'Tentar novamente'
-    });
-</script>
-@endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: "{{ session('error') }}",
+                confirmButtonText: 'Tentar novamente'
+            });
+        </script>
+    @endif
 
 
 
@@ -136,14 +186,14 @@
 <script>
     function verClientes(estrutura, categoria, cor) {
         // Chama a função que carrega os clientes
-        modulo_bloco('','carregarEstrutura', categoria, cor);
-    
+        modulo_bloco('', 'carregarEstrutura', categoria, cor);
+
         // Define um pequeno atraso para permitir que o HTML seja renderizado
         setTimeout(() => {
             // Deslocar para a div de clientes com uma rolagem suave
             const clientesList = document.getElementById('clientesList');
             const top = clientesList.getBoundingClientRect().top + window.scrollY; // Posição da div
-    
+
             // Animação de rolagem suave
             window.scrollTo({
                 top: top,
@@ -153,51 +203,71 @@
     }
 
 
-    function openEditModal(id_cliente, nome, email, telefone, cnpj, categoria, endereco) {
-    document.getElementById('editClientId').value = id_cliente;
-    document.getElementById('editClientName').value = nome;
-    document.getElementById('editClientEmail').value = email;
-    document.getElementById('editClientPhone').value = telefone; // Novo campo
-    document.getElementById('editClientCnpj').value = cnpj; // Novo campo
-    document.getElementById('editClientCategory').value = categoria; // Novo campo
-    document.getElementById('editClientAddress').value = endereco; // Novo campo
+    // function openEditModal(id_cliente, nome, email, telefone, cnpj, categoria, endereco) {
+    //     document.getElementById('editClientId').value = id_cliente;
+    //     document.getElementById('editClientName').value = nome;
+    //     document.getElementById('editClientEmail').value = email;
+    //     document.getElementById('editClientPhone').value = telefone; // Novo campo
+    //     document.getElementById('editClientCnpj').value = cnpj; // Novo campo
+    //     document.getElementById('editClientCategory').value = categoria; // Novo campo
+    //     document.getElementById('editClientAddress').value = endereco; // Novo campo
 
-    const modal = document.getElementById('editClientModal');
-    const modalContent = document.getElementById('modalContent');
-    
-    modal.classList.remove('hidden');
-    setTimeout(() => {
-        modalContent.classList.remove('scale-0');
-        modalContent.classList.add('scale-100');
-    }, 10); // Delay para permitir a remoção da classe 'scale-0'
-}
+    //     const modal = document.getElementById('editClientModal');
+    //     const modalContent = document.getElementById('modalContent');
+
+    //     modal.classList.remove('hidden');
+    //     setTimeout(() => {
+    //         modalContent.classList.remove('scale-0');
+    //         modalContent.classList.add('scale-100');
+    //     }, 10); // Delay para permitir a remoção da classe 'scale-0'
+    // }
 
 
-function closeModal() {
-    const modalContent = document.getElementById('modalContent');
-    
-    modalContent.classList.remove('scale-100');
-    modalContent.classList.add('scale-0');
+    function openMensagemModal(id_cliente) {
+        document.getElementById('clientId').value = id_cliente;
+        // document.getElementById('ClientName').value = nome;
+        // document.getElementById('ClientEmail').value = email;
 
-    setTimeout(() => {
-        document.getElementById('editClientModal').classList.add('hidden');
-    }, 300); // Tempo deve corresponder à duração da transição
-}
 
-// Adiciona evento de clique para fechar o modal apenas se clicar fora do conteúdo
-document.getElementById('editClientModal').addEventListener('click', function(event) {
-    const modalContent = document.getElementById('modalContent');
-    // Verifica se o clique foi fora do conteúdo do modal
-    if (!modalContent.contains(event.target)) {
-        closeModal();
+        const modal = document.getElementById('emailCliente');
+        const modalContent = document.getElementById('modalEmailContent');
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modalContent.classList.remove('scale-0');
+            modalContent.classList.add('scale-100');
+        }, 10); // Delay para permitir a remoção da classe 'scale-0'
     }
-});
 
 
+    // function closeModal() {
+    //     const modalContent = document.getElementById('modalContent');
 
+    //     modalContent.classList.remove('scale-100');
+    //     modalContent.classList.add('scale-0');
 
+    //     setTimeout(() => {
+    //         document.getElementById('editClientModal').classList.add('hidden');
+    //     }, 300); // Tempo deve corresponder à duração da transição
+    // }
 
-    </script>
-    
+    function closeMensagemModal() {
+        const modalContent = document.getElementById('modalEmailContent');
 
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-0');
 
+        setTimeout(() => {
+            document.getElementById('emailCliente').classList.add('hidden');
+        }, 300); // Tempo deve corresponder à duração da transição
+    }
+
+    // Adiciona evento de clique para fechar o modal apenas se clicar fora do conteúdo
+    document.getElementById('editClientModal').addEventListener('click', function(event) {
+        const modalContent = document.getElementById('modalContent');
+        // Verifica se o clique foi fora do conteúdo do modal
+        if (!modalContent.contains(event.target)) {
+            closeModal();
+        }
+    });
+</script>

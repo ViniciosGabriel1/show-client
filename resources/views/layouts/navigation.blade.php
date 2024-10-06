@@ -21,6 +21,11 @@
                          {{ __('Cadastrar Clientes') }}
                     </x-nav-link>
                 </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.mensagemClientes')" :active="request()->routeIs('dashboard.mensagemClientes')">
+                         {{ __('Enviar Mensagens') }}
+                    </x-nav-link>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -77,6 +82,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.create')" :active="request()->routeIs('dashboard.create')">
                 {{ __('Cadastro de Clientes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.create')" :active="request()->routeIs('dashboard.create')">
+                {{ __('Enviar Mensagens') }}
             </x-responsive-nav-link>
         </div>
 

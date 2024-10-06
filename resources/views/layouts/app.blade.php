@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Show Client') }}</title>
 
         <!-- Fonts -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -39,11 +39,44 @@
                 {{ $slot }}
             </main>
 
-            <!-- jQuery via CDN -->
-<!-- No final da página, antes do fechamento da tag body -->
+{{-- @if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: "{!! session('success') !!}",
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif --}}
+
+
+@if (session('success'))
+<script>
+Swal.fire({
+icon: 'success',
+title: 'Sucesso!',
+html: '{!! session('success') !!}', 
+confirmButtonText: 'OK'
+});
+</script>
+@endif
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: "{{ session('error') }}",
+        confirmButtonText: 'Tentar novamente'
+    });
+</script>
+@endif
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"  crossorigin="anonymous"></script>
             <script src="{{ asset('js/modulo.js') }}" defer></script>
+            <script src="{{ asset('js/modalEdit.js') }}" defer></script>
+            <script src="{{ asset('js/modalMensagem.js') }}" defer></script>
 
 
         </div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ClientesImport;
+use App\Mail\Cliente;
 use App\Models\Clientes;
 use App\Services\ClientesService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -31,29 +33,27 @@ class ClientesController extends Controller
         // $estrutura = $request->input('estrutura');
         $caso = $request->input('caso');
         $corCard = $request->input('corCard');
-        
-        $estrutura = $this->clientes->montarEstrutura($categoria,$corCard);
+
+        $estrutura = $this->clientes->montarEstrutura($categoria, $corCard);
         // dd($estrutura);
-        
+
         // Retorna os clientes como um JSON para o JavaScript tratar
         return response()->json($estrutura);
-
     }
 
-    
-    public function excluirCliente(Request $request){
+
+    public function excluirCliente(Request $request)
+    {
         // dd($request);
         $id_cliente = $request->input('id_cliente'); // Obtendo o ID do cliente do request
         $categoria = $request->input('categoria'); // Obtendo o ID do cliente do request
         $corCard = $request->input('corCard'); // Obtendo o ID do cliente do request
 
-       $this->clientes->deletarCliente($id_cliente);
+        $this->clientes->deletarCliente($id_cliente);
 
-        $estrutura = $this->clientes->montarEstrutura($categoria,$corCard);
+        $estrutura = $this->clientes->montarEstrutura($categoria, $corCard);
 
         return response()->json($estrutura);
-
-
     }
 
     public function atualizarCliente(Request $request)
@@ -67,10 +67,10 @@ class ClientesController extends Controller
             'categoria' => 'required|string|max:100',
             'endereco' => 'nullable|string|max:255',
         ]);
-    
+
         try {
             $cliente = $this->clientes->buscarClientePorId($request->id_cliente);
-    
+
             // Atualiza os dados do cliente com os dados do request
             $cliente->update([
                 'nome' => $request->nome,
@@ -80,42 +80,52 @@ class ClientesController extends Controller
                 'categoria' => $request->categoria,
                 'endereco' => $request->endereco,
             ]);
-    
+
             // Retorna uma mensagem de sucesso com redirect
-            return redirect()->back()->with('success', 'Cliente atualizado com sucesso!');
-    
+            return redirect()->back()->with('success', 'Cliente ' . $request->nome . ' atualizado com sucesso!');
         } catch (\Exception $e) {
             // Retorna uma mensagem de erro com redirect
             return redirect()->back()->with('error', 'Erro ao atualizar o cliente.');
         }
     }
-    
-    
-
-
 
 
     public function importClientes(Request $request)
     {
         // dd($request->input('id_usuario')); // Você pode usar isso para debugar
-    
+
         // Valida o arquivo enviado
         $request->validate([
             'import_file' => 'required|mimes:xlsx,xls,csv',
-        ]); 
-    
+        ]);
+
         // Obtém o id_usuario do request
         $id_usuario = $request->input('id_usuario');
-    
+
         // Importa os clientes
         Excel::import(new ClientesImport($id_usuario), $request->file('import_file'));
-    
+
         // Redireciona com uma mensagem de sucesso
         return redirect()->back()->with('success', 'Clientes importados com sucesso!');
     }
 
 
+    public function mensagemClientes(Request $request)
+    {
+        $usuario  = $this->clientes->pegarDadosLogado();
+        $cliente = $this->clientes->buscarClientePorId($request['id_cliente']);
+        // dd($cliente);
+
+
+        Mail::to($cliente['email'], $cliente['nome'])->send(new Cliente([
+            'fromName' => $usuario[0]['name'],
+            'fromEmail' => $usuario[0]['email'],
+            'subject' => $request->input('assunto'),
+            'message' => $request->input('mensagem')
+        ]));
+
+        return redirect()->back()->with('success', 'Email enviado para o cliente <strong>' . $cliente['nome'] . '</strong> com sucesso!');        
 
     
-
+    }
 }
